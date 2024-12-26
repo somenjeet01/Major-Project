@@ -2,7 +2,7 @@
 <div class="row">
   <div class="col-8 offset-2">
     <h3>Create a New Listing</h3>
-    <form method="POST" action="/listings">
+    <form method="POST" action="/listings" class="needs-validation" novalidate>
       <div class="mb-3">
         <label for="title" class="form-label">Title</label>
         <input
@@ -10,6 +10,7 @@
           type="text"
           class="form-control"
           placeholder="Add a Catchy Title"
+          required
         />
       </div>
 
@@ -20,16 +21,17 @@
           cols="5px"
           name="listing[description]"
           class="form-control"
+          required
         ></textarea>
       </div>
 
       <div class="mb-3">
-       
         <input
           name="listing[image]"
           type="text"
           class="form-control"
           placeholder="Enter Your URL image link"
+          required
         />
       </div>
 
@@ -51,6 +53,7 @@
             type="text"
             class="form-control"
             placeholder="India"
+            required
           />
         </div>
       </div>
@@ -62,6 +65,7 @@
           type="text"
           class="form-control"
           placeholder="Koderma,Jharkhand"
+          required
         />
       </div>
       <button class="btn btn-dark add-btn">Add</button>
