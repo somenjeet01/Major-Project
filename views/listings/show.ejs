@@ -11,17 +11,16 @@
       alt="/listing_image"
     />
     <div class="card-body">
-      <p class="card-text">
-        <br />
-        <br />
-        <%= listing.description%><br />
-        &#8377;<%= listing.price%> <br />
-        <%=listing.location%> <br /><%= listing.country%>
-      </p>
+       <p class="card-text"><i> Owned  By </i><b><%= listing.owner.username%></b> </p> 
+       <p class="card-text"> <%= listing.description%></p>
+       <p class="card-text">&#8377;<%= listing.price%> <br /></p> 
+       <p class="card-text"><%=listing.location%></p>
+      <p class="card-text"><%= listing.country%></p>
     </div>
   </div>
 
   <div class="btns">
+   <% if(currUser && currUser._id.equals(listing.owner._id)) { %> 
     <a
       href="/listings/<%=listing._id%>/edit"
       class="btn btn-dark col-1 offset-2 edit-btn"
@@ -30,9 +29,11 @@
     <form method="POST" action="/listings/<%= listing._id %>/?_method=delete">
       <button class="btn btn-dark offset-4">DELETE</button>
     </form>
+    <% } %>
   </div>
 
   <div class="col-md-8 offset-2 mt-2">
+   <% if(currUser){ %> 
     <hr />
     <h4>Leave a Reviews</h4>
     <form
@@ -65,8 +66,9 @@
         ></textarea>
         <div class="invalid-feedback">Need to add some Comments</div>
       </div>
-
+   
       <button class="mb-3 mt-3 btn btn-outline-dark">Submit</button>
+      <% } %>
     </form>
 
     <hr />
