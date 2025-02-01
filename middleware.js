@@ -1,6 +1,7 @@
 const Listing = require("./models/listing");
 const expressError = require("./utils/expressError.js");
-const { listingSchema,reviewSchema } = require("./schema.js");
+const { listingSchema, reviewSchema } = require("./schema.js");
+const Review = require("./models/review.js");
 
 module.exports.isLoggedIn = (req, res, next) => {
   if (!req.isAuthenticated()) {
@@ -20,10 +21,20 @@ module.exports.saveRedirectUrl = (req, res, next) => {
 
 module.exports.isOwner = async (req, res, next) => {
   let { id } = req.params;
-  let listing = Listing.findById(id);
-  if (!listing.owner._id.equals(res.locals.currUser._id)) {
+  let listing = await Listing.findById(id);
+  if (!listing.owner.equals(res.locals.currUser._id)) {
     req.flash("error", "You are not the owner of the list!");
-    return res.redirect(`listing${_id}`);
+    return res.redirect(`/listings/ ${id}`);
+  }
+  next();
+};
+
+module.exports.isReviewAuthor = async (req, res, next) => {
+  let { reviewId, id } = req.params;
+  let review = await Review.findById(reviewId);
+  if (!review.author.equals(res.locals.currUser._id)) {
+    req.flash("error", "You are not the Author of the Review!");
+    return res.redirect(`/listings/${id}`);
   }
   next();
 };
@@ -50,3 +61,5 @@ module.exports.validateReview = (req, res, next) => {
   }
 };
 
+
+ 
