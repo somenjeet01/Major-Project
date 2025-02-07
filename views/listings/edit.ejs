@@ -2,7 +2,13 @@
 <div class="row mt-2">
   <div class="col-8 offset-2">
     <h3>Edit your Listing</h3>
-    <form method="POST" action="/listings/<%=listing._id%>?_method=PUT" novalidate class="needs-validation">
+    <form
+      method="POST"
+      action="/listings/<%=listing._id%>?_method=PUT"
+      novalidate
+      class="needs-validation"
+      enctype="multipart/form-data"
+    >
       <div class="mb-3">
         <label for="title">Title</label>
         <input
@@ -28,17 +34,24 @@
       </textarea
         >
       </div>
+      
 
       <div class="mb-3">
-        <label for="image" class="form-label">Image Link</label>
+        Original Listing Image <br />
+        <img src="<%=originalImageUrl%>" />
+      </div>
+
+
+      <div class="mb-3">
+        <label for="image" class="form-label">upload your Image</label>
         <input
           name="listing[image]"
-          type="text"
+          type="file"
           class="form-control"
           value="<%=listing.image%>"
-          required
         />
       </div>
+
 
       <div class="row">
         <div class="mb-3 col-4">
@@ -50,7 +63,7 @@
             value="<%=listing.price%>"
             required
           />
-           <div class="invalid-feedback">Price should be valid</div>
+          <div class="invalid-feedback">Price should be valid</div>
         </div>
         <div class="mb-3 col-8">
           <label for="country" class="form-label">Country</label>
@@ -61,7 +74,7 @@
             value="<%=listing.country%>"
             required
           />
-           <div class="invalid-feedback">Country should be valid</div>
+          <div class="invalid-feedback">Country should be valid</div>
         </div>
       </div>
 
@@ -73,7 +86,6 @@
           value="<%=listing.location%>"
           class="form-control"
           required
-          
         />
         <div class="invalid-feedback">Loaction should be valid</div>
       </div>
